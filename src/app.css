@@ -1,0 +1,134 @@
+/* Theme Modes */
+body.dark {
+  background: #0a192f;
+  color: #ccd6f6;
+}
+
+body.light {
+  background: #f9f9f9;
+  color: #222;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: black;
+  color: white;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1.2rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-links li {
+  cursor: pointer;
+}
+
+.theme-toggle {
+  border: none;
+  padding: 0.5rem 1rem;
+  background: #64ffda;
+  color: #0a192f;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.theme-toggle:hover {
+  background: #3d973d;
+}
+
+/* Hamburger menu */
+.menu-icon {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.menu-icon span {
+  width: 25px;
+  height: 3px;
+  background: currentColor;
+  transition: 0.3s;
+}
+
+.menu-icon.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-icon.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-icon.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Responsive Menu */
+@media screen and (max-width: 768px) {
+  .menu-icon {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    right: 0;
+    top: 48px;
+    background: inherit;
+    flex-direction: column;
+    width: 200px;
+    transform: translateX(100%);
+    opacity: 0;
+    visibility: hidden;
+    padding: 1rem;
+    gap: 0.2rem;
+  }
+
+  .nav-links.active {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-links li {
+    padding: 1rem 0;
+  }
+}
+
+/* Sections */
+.section {
+  padding: 0.35rem 0.3rem;
+  border-bottom: 1px solid #233554;
+}
+
+/* Scroll highlight */
+.highlight {
+  animation: sectionHighlight 1s ease-in-out;
+}
+
+@keyframes sectionHighlight {
+  from {
+    background-color: #64ffda33;
+  }
+
+  to {
+    background-color: transparent;
+  }
+}
