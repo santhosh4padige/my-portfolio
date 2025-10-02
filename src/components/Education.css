@@ -1,0 +1,88 @@
+.education-container {
+  padding: 50px 20px;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  text-align: center;
+  perspective: 1000px; /* For 3D effect */
+}
+
+.edu-title {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: #2c3e50;
+  letter-spacing: 2px;
+  animation: fadeInDown 1s ease forwards;
+}
+
+.edu-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.edu-card {
+  background: #fff;
+  width: 280px;
+  padding: 30px 20px;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.edu-card:hover {
+  transform: rotateY(15deg) rotateX(10deg) translateY(-10px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.edu-icon {
+  font-size: 3rem;
+  color: #3498db;
+  margin-bottom: 15px;
+  animation: bounce 1.5s infinite;
+}
+
+.edu-degree {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #2c3e50;
+}
+
+.edu-institution,
+.edu-location,
+.edu-duration,
+.edu-gpa {
+  color: #555;
+  margin: 3px 0;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .edu-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}
