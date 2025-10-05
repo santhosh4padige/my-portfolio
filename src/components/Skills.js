@@ -108,7 +108,7 @@ const skillsData = {
   ],
   Testing: [
     { name: "JUnit", icon: <FaJava size={50} color="#f89820" /> },
-    { name: "Mockito", icon: <SiJenkins size={50} color="#d24939" /> }, 
+    { name: "Mockito", icon: <SiJenkins size={50} color="#d24939" /> },
     { name: "Cypress", icon: <SiCypress size={50} color="#17202c" /> },
     { name: "Jasmine", icon: <SiJasmine size={50} color="#8b008b" /> },
     { name: "Karma", icon: <FaVials size={50} color="#ff0000" /> },
@@ -136,30 +136,34 @@ const Skills = () => {
   const categoryRef = useRef();
   const skillsRef = useRef();
 
-  // Smooth scroll hook
-  const useSmoothScroll = (ref, speed = 0.05, dependency) => {
+  const useSmoothScroll = (ref, speed = 0.3, dependency) => {
     useEffect(() => {
       const container = ref.current;
       if (!container) return;
-      let lastTime = performance.now();
+
       let animationId;
 
-      const scroll = (time) => {
-        const delta = time - lastTime;
-        lastTime = time;
-        container.scrollLeft += speed * delta;
-        if (container.scrollLeft >= container.scrollWidth / 2) container.scrollLeft = 0;
-        animationId = requestAnimationFrame(scroll);
+      const step = () => {
+        if (!container) return;
+
+        container.scrollLeft += speed;
+
+        // reset scroll when it reaches half of scrollWidth (because of duplicates)
+        if (container.scrollLeft >= container.scrollWidth / 2) {
+          container.scrollLeft = 0;
+        }
+
+        animationId = requestAnimationFrame(step);
       };
 
-      animationId = requestAnimationFrame(scroll);
+      animationId = requestAnimationFrame(step);
 
       return () => cancelAnimationFrame(animationId);
     }, [ref, dependency, speed]);
   };
 
-  useSmoothScroll(categoryRef, 0.05, null);
-  useSmoothScroll(skillsRef, 0.05, selectedCategory);
+  useSmoothScroll(categoryRef, 0.25, null);
+  useSmoothScroll(skillsRef, 0.35, selectedCategory);
 
   return (
     <section className="skills-container">

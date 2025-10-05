@@ -181,3 +181,17 @@
   .skills-grid { gap: 10px; }
   .skill-card { width: 120px; height: 120px; }
 }
+.categories-carousel,
+.skills-grid {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto; /* enable horizontal scroll */
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+}
+
+.categories-carousel::-webkit-scrollbar,
+.skills-grid::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
