@@ -93,7 +93,7 @@ const Navbar = ({ toggleTheme, darkMode }) => {
         })}
 
         {/* Theme Toggle */}
-        <li>
+        {/* <li>
           <button className="theme-toggle" onClick={toggleTheme}>
             {darkMode ? (
               <>
@@ -107,7 +107,7 @@ const Navbar = ({ toggleTheme, darkMode }) => {
               </>
             )}
           </button>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );
