@@ -55,7 +55,7 @@ export default function App() {
             <section id="skills" className="section">
               <Skills />
             </section>
-            <ScrollNav />
+                <ScrollNav />
           </main>
         </>
       )}

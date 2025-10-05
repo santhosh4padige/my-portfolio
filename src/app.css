@@ -153,6 +153,98 @@ body.light .menu-icon span {
   transform: rotate(-45deg) translate(6px, -6px);
 }
 
+/* Container for scroll nav buttons */
+.scroll-nav {
+  position: fixed;        /* Fixed on screen */
+  right: 20px;            /* Distance from right edge */
+  bottom: 40px;           /* Distance from bottom edge */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;              /* Space between buttons */
+  z-index: 9999;          /* On top of all content */
+  pointer-events: auto;
+}
+
+/* Common button style */
+.scroll-btn {
+  position: relative;
+  background: var(--primary);   /* Primary theme color */
+  border: none;
+  color: var(--dark-bg);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;           /* Circular buttons */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Hover effects */
+.scroll-btn:hover {
+  transform: scale(1.2);        /* Slight pop effect */
+  background: var(--light-text);/* Light color on hover */
+  color: var(--dark-bg);        /* Icon color changes */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+/* Tooltip styling */
+.scroll-btn .tooltip-text {
+  position: absolute;
+  left: -160%;                   /* Show tooltip on left */
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+/* Show tooltip on hover */
+.scroll-btn:hover .tooltip-text {
+  opacity: 1;
+  transform: translateY(-50%) translateX(-5px); /* slight slide-in effect */
+}
+
+/* Optional arrow for tooltip */
+.scroll-btn .tooltip-text::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent rgba(0,0,0,0.75);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .scroll-nav {
+    right: 10px;
+    bottom: 30px;
+    gap: 10px;
+  }
+
+  .scroll-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .scroll-btn .tooltip-text {
+    font-size: 0.75rem;
+    left: -140%;
+  }
+}
+
+
 /* ------------------------------
    Mobile Responsive Menu
 ------------------------------ */
