@@ -1,8 +1,57 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaArrowLeft } from "react-icons/fa";
-import { FaCode, FaLaptopCode, FaCogs, FaDatabase, FaCloud, FaProjectDiagram, FaVial, FaTools, FaCheckCircle } from "react-icons/fa";
+import {
+  FaArrowLeft,
+  FaCode,
+  FaLaptopCode,
+  FaCogs,
+  FaDatabase,
+  FaCloud,
+  FaProjectDiagram,
+  FaVial,
+  FaTools,
+  FaCheckCircle,
+  FaJava,
+  FaJsSquare,
+  FaPython,
+  FaReact,
+  FaAngular,
+  FaNodeJs,
+  FaHtml5,
+  FaCss3,
+  FaDocker,
+  FaAws,
+  FaGit,
+  FaVials,
+  FaBug
+} from "react-icons/fa";
+
+import {
+  SiSpringboot,
+  SiDjango,
+  SiFlask,
+  SiMysql,
+  SiMongodb,
+  SiOracle,
+  SiRedis,
+  SiKubernetes,
+  SiTerraform,
+  SiJenkins,
+  SiPostman,
+  SiSwagger,
+  SiRabbitmq,
+  SiGraphql,
+  SiCypress,
+  SiJasmine,
+  SiCelery,
+  SiHibernate,
+  SiJira,
+  SiConfluence,
+  SiWebrtc,
+} from "react-icons/si";
+
 import "./SkillsShowcase.css";
 
+// Category Icons
 const categoryIcons = {
   "Programming Languages": <FaCode />,
   "User Interface Development": <FaLaptopCode />,
@@ -15,98 +64,91 @@ const categoryIcons = {
   Methodologies: <FaCheckCircle />,
 };
 
-// Skills Data
+// Skills Data with React Icons
 const skillsData = {
   "Programming Languages": [
-    { name: "Java", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
-    { name: "JavaScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-    { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
-    { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+    { name: "Java", icon: <FaJava size={50} color="#f89820" /> },
+    { name: "JavaScript", icon: <FaJsSquare size={50} color="#f7df1e" /> },
+    { name: "TypeScript", icon: <SiGraphql size={50} color="#007acc" /> }, // alternative
+    { name: "Python", icon: <FaPython size={50} color="#3776ab" /> },
   ],
   "User Interface Development": [
-    { name: "Node.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-    { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-    { name: "Angular", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" },
-    { name: "HTML5", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-    { name: "CSS3", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
-    { name: "React Native", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+    { name: "Node.js", icon: <FaNodeJs size={50} color="#68a063" /> },
+    { name: "React", icon: <FaReact size={50} color="#61dafb" /> },
+    { name: "Angular", icon: <FaAngular size={50} color="#dd0031" /> },
+    { name: "HTML5", icon: <FaHtml5 size={50} color="#e34f26" /> },
+    { name: "CSS3", icon: <FaCss3 size={50} color="#264de4" /> },
+    { name: "React Native", icon: <FaReact size={50} color="#61dafb" /> },
   ],
   Frameworks: [
-    { name: "Spring Boot", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" },
-    { name: "Django", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" },
-    { name: "Flask", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" },
-    { name: "Express.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+    { name: "Spring Boot", icon: <SiSpringboot size={50} color="#6db33f" /> },
+    { name: "Django", icon: <SiDjango size={50} color="#092e20" /> },
+    { name: "Flask", icon: <SiFlask size={50} color="#000000" /> },
+    { name: "Express.js", icon: <FaNodeJs size={50} color="#68a063" /> },
   ],
   Databases: [
-    { name: "MySQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
-    { name: "MongoDB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
-    { name: "Oracle", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg" },
-    { name: "Redis", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
-    { name: "Cassandra", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" },
+    { name: "MySQL", icon: <SiMysql size={50} color="#4479a1" /> },
+    { name: "MongoDB", icon: <SiMongodb size={50} color="#47a248" /> },
+    { name: "Oracle", icon: <SiOracle size={50} color="#f80000" /> },
+    { name: "Redis", icon: <SiRedis size={50} color="#dc382d" /> },
   ],
   "Cloud & DevOps": [
-    { name: "AWS", logo: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" },
-    { name: "GCP", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" },
-    { name: "Azure", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
-    { name: "Kubernetes", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" },
-    { name: "Docker", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
-    { name: "Terraform", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" },
-    { name: "Jenkins", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" },
+    { name: "AWS", icon: <FaAws size={50} color="#ff9900" /> },
+    { name: "GCP", icon: <FaCloud size={50} color="#4285f4" /> }, // alternative
+    { name: "Kubernetes", icon: <SiKubernetes size={50} color="#326ce5" /> },
+    { name: "Docker", icon: <FaDocker size={50} color="#2496ed" /> },
+    { name: "Terraform", icon: <SiTerraform size={50} color="#623ce4" /> },
+    { name: "Jenkins", icon: <SiJenkins size={50} color="#d24939" /> },
   ],
   "System Design": [
-    { name: "Microservices", logo: "https://img.icons8.com/?size=100&id=Y8U6C5dYvirN&format=png&color=000000" },
-    { name: "RESTful APIs", logo: "https://img.icons8.com/ios-filled/452/api-settings.png" },
-    { name: "GraphQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" },
-    { name: "Event-Driven Architecture", logo: "https://img.icons8.com/ios-filled/452/flow-chart.png" },
+    { name: "Microservices", icon: <FaProjectDiagram size={50} color="#00bcd4" /> },
+    { name: "RESTful APIs", icon: <SiSwagger size={50} color="#85ea2d" /> },
+    { name: "GraphQL", icon: <SiGraphql size={50} color="#e535ab" /> },
+    { name: "Event-Driven Architecture", icon: <FaProjectDiagram size={50} color="#ff5722" /> },
   ],
   Testing: [
-    { name: "JUnit", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
-    { name: "Mockito", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Mockito_Logo.png" },
-    { name: "Jest", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" },
-    { name: "Cypress", logo: "https://avatars.githubusercontent.com/u/8908513?s=200&v=4" },
-    { name: "Jasmine", logo: "https://www.pikpng.com/pngl/m/129-1291662_jasmine-logo-png-transparent-jasmine-angular-clipart.png" },
-    { name: "Karma", logo: "https://karma-runner.github.io/assets/img/banner.png" },
+    { name: "JUnit", icon: <FaJava size={50} color="#f89820" /> },
+    { name: "Mockito", icon: <SiJenkins size={50} color="#d24939" /> }, 
+    { name: "Cypress", icon: <SiCypress size={50} color="#17202c" /> },
+    { name: "Jasmine", icon: <SiJasmine size={50} color="#8b008b" /> },
+    { name: "Karma", icon: <FaVials size={50} color="#ff0000" /> },
   ],
   "Tools & Technologies": [
-    { name: "Apache Kafka", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg" },
-    { name: "Celery", logo: "https://docs.celeryq.dev/en/stable/_static/celery_512.png" },
-    { name: "Hibernate", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hibernate/hibernate-original.svg" },
-    { name: "Git", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-    { name: "JIRA", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" },
-    { name: "Confluence", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/confluence/confluence-original.svg" },
-    { name: "Swagger", logo: "https://logo.svgcdn.com/l/swagger.png" },
-    { name: "Postman", logo: "https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" },
-    { name: "WebSockets", logo: "https://img.icons8.com/ios-filled/452/web.png" },
-    { name: "RabbitMQ", logo: "https://www.vectorlogo.zone/logos/rabbitmq/rabbitmq-icon.svg" },
+    { name: "Apache Kafka", icon: <SiJenkins size={50} color="#d24939" /> }, // alternative
+    { name: "Celery", icon: <SiCelery size={50} color="#4e9a06" /> },
+    { name: "Hibernate", icon: <SiHibernate size={50} color="#59666c" /> },
+    { name: "Git", icon: <FaGit size={50} color="#f05032" /> },
+    { name: "JIRA", icon: <SiJira size={50} color="#0052cc" /> },
+    { name: "Confluence", icon: <SiConfluence size={50} color="#172b4d" /> },
+    { name: "Swagger", icon: <SiSwagger size={50} color="#85ea2d" /> },
+    { name: "Postman", icon: <SiPostman size={50} color="#ff6c37" /> },
+    { name: "WebSockets", icon: <SiWebrtc size={50} color="#00bcd4" /> },
+    { name: "RabbitMQ", icon: <SiRabbitmq size={50} color="#ff6600" /> },
   ],
   Methodologies: [
-    { name: "Agile (Scrum)", logo: "https://img.icons8.com/?size=100&id=Z0kIsLxR0GgF&format=png&color=000000" },
-    { name: "TDD", logo: "https://img.icons8.com/ios/452/test.png" },
+    { name: "Agile (Scrum)", icon: <FaCheckCircle size={50} color="#4caf50" /> },
+    { name: "TDD", icon: <FaBug size={50} color="#c21325" /> },
   ],
 };
+
 const Skills = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const categoryRef = useRef();
   const skillsRef = useRef();
 
-  // Time-based smooth scroll function
-  const useSmoothScroll = (ref, speed = 0.6, dependency) => {
+  // Smooth scroll hook
+  const useSmoothScroll = (ref, speed = 0.05, dependency) => {
     useEffect(() => {
-      let animationId;
+      const container = ref.current;
+      if (!container) return;
       let lastTime = performance.now();
+      let animationId;
 
       const scroll = (time) => {
-        const container = ref.current;
         const delta = time - lastTime;
         lastTime = time;
-
-        if (container) {
-          container.scrollLeft += speed * delta;
-          if (container.scrollLeft >= container.scrollWidth / 2) {
-            container.scrollLeft = 0;
-          }
-        }
-
+        container.scrollLeft += speed * delta;
+        if (container.scrollLeft >= container.scrollWidth / 2) container.scrollLeft = 0;
         animationId = requestAnimationFrame(scroll);
       };
 
@@ -116,9 +158,8 @@ const Skills = () => {
     }, [ref, dependency, speed]);
   };
 
-  // Apply smooth scroll to categories and skills
-  useSmoothScroll(categoryRef,0.05, null); // slower scroll for categories
-  useSmoothScroll(skillsRef, 0.05, selectedCategory); // slightly faster for skills
+  useSmoothScroll(categoryRef, 0.2, null);
+  useSmoothScroll(skillsRef, 0.3, selectedCategory);
 
   return (
     <section className="skills-container">
@@ -127,18 +168,13 @@ const Skills = () => {
       {!selectedCategory && (
         <div className="categories-carousel" ref={categoryRef}>
           {Object.keys(skillsData).map((category) => (
-            <div
-              key={category}
-              className="category-card"
-              onClick={() => setSelectedCategory(category)}
-            >
+            <div key={category} className="category-card" onClick={() => setSelectedCategory(category)}>
               <div className="category-icon">{categoryIcons[category] || "📌"}</div>
               <div className="category-name">{category}</div>
             </div>
           ))}
-          {/* Duplicate for seamless scroll */}
-          {Object.keys(skillsData).map((category) => (
-            <div key={"dup-" + category} className="category-card">
+          {Object.keys(skillsData).map((category, index) => (
+            <div key={`dup-${category}-${index}`} className="category-card">
               <div className="category-icon">{categoryIcons[category] || "📌"}</div>
               <div className="category-name">{category}</div>
             </div>
@@ -157,14 +193,13 @@ const Skills = () => {
           <div className="skills-grid" ref={skillsRef}>
             {skillsData[selectedCategory].map((skill) => (
               <div className="skill-card" key={skill.name}>
-                <img src={skill.logo} alt={skill.name} className="skill-logo" />
+                {skill.icon}
                 <div className="skill-name">{skill.name}</div>
               </div>
             ))}
-            {/* Duplicate for seamless scroll */}
-            {skillsData[selectedCategory].map((skill) => (
-              <div className="skill-card" key={"dup-" + skill.name}>
-                <img src={skill.logo} alt={skill.name} className="skill-logo" />
+            {skillsData[selectedCategory].map((skill, index) => (
+              <div className="skill-card" key={`dup-${skill.name}-${index}`}>
+                {skill.icon}
                 <div className="skill-name">{skill.name}</div>
               </div>
             ))}
@@ -176,4 +211,3 @@ const Skills = () => {
 };
 
 export default Skills;
-

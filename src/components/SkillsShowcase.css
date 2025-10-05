@@ -115,19 +115,24 @@
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative; /* needed for hover glow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.skill-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 24px rgba(0,212,255,0.6);
-}
-
-.skill-logo {
+/* Icon inside skill card */
+.skill-card svg {
   width: 60px;
   height: 60px;
-  object-fit: contain;
   margin-bottom: 10px;
   transition: transform 0.3s ease;
+  color: var(--primary);
+}
+
+.skill-card:hover svg {
+  transform: scale(1.1);
 }
 
 .skill-name {
@@ -153,55 +158,26 @@
 }
 
 @keyframes shimmer {
-  0% {
-    transform: translateX(-200%) rotate(25deg);
-  }
-  100% {
-    transform: translateX(200%) rotate(25deg);
-  }
+  0% { transform: translateX(-200%) ; }
+  100% { transform: translateX(200%) ; }
 }
 
-/* Responsive adjustments based on fixed container */
+/* Responsive adjustments */
 @media (max-width: 1200px) {
-  .skills-container {
-    max-width: 1000px;
-  }
+  .skills-container { max-width: 1000px; }
 }
 
 @media (max-width: 1024px) {
-  .category-card {
-    width: 120px;
-    height: 120px;
-  }
-  .skills-grid {
-    gap: 15px;
-  }
-  .skill-card {
-    width: 120px;
-    height: 120px;
-  }
+  .category-card { width: 120px; height: 120px; }
+  .skills-grid { gap: 15px; }
+  .skill-card { width: 120px; height: 120px; }
 }
 
 @media (max-width: 768px) {
-  .skills-container {
-    max-width: 90%;
-    padding: 30px 10px;
-  }
-  .skills-title {
-    font-size: 1.8rem;
-  }
-  .expanded-header h3 {
-    font-size: 1.2rem;
-  }
-  .category-card {
-    width: 120px;
-    height: 120px;
-  }
-  .skills-grid {
-    gap: 10px;
-  }
-  .skill-card {
-    width: 120px;
-    height: 120px;
-  }
+  .skills-container { max-width: 90%; padding: 30px 10px; }
+  .skills-title { font-size: 1.8rem; }
+  .expanded-header h3 { font-size: 1.2rem; }
+  .category-card { width: 120px; height: 120px; }
+  .skills-grid { gap: 10px; }
+  .skill-card { width: 120px; height: 120px; }
 }

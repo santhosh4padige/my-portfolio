@@ -186,7 +186,7 @@
   display: inline-block;
   animation: shimmer 5s linear infinite;
   opacity: 1;
-  transform: none;
+  transform: none !important;
 }
 
 /* Caption styling */
