@@ -181,10 +181,10 @@ body.light .menu-icon span {
 /* Common button style */
 .scroll-btn {
   position: relative;
-  background: var(--primary);
+  background: rgb(92, 92, 214);
   /* Primary theme color */
   border: none;
-  color: var(--dark-bg);
+  color: white;
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -197,16 +197,7 @@ body.light .menu-icon span {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Hover effects */
-.scroll-btn:hover {
-  transform: scale(1.2);
-  /* Slight pop effect */
-  background: var(--light-text);
-  /* Light color on hover */
-  color: var(--dark-bg);
-  /* Icon color changes */
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-}
+
 
 /* Tooltip styling */
 .scroll-btn .tooltip-text {
