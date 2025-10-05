@@ -19,10 +19,10 @@ const About = () => {
   ];
 
   const icons = [
-    { icon: <FaLinkedin />, href: "https://www.linkedin.com/in/your-profile", tooltip: "LinkedIn" },
-    { icon: <FaEnvelope />, href: "mailto:your.email@example.com", tooltip: "Email" },
-    { icon: <FaFilePdf />, href: "/resume.pdf", download: true, tooltip: "Download Resume" },
-    { icon: <FaFileAlt />, href: "/coverletter.pdf", download: true, tooltip: "Download Cover Letter" },
+    { icon: <FaLinkedin />, href: "https://www.linkedin.com/in/santhosh-kumar-padige/", tooltip: "LinkedIn" },
+    { icon: <FaEnvelope />, href: "mailto:santhosh4pdaige@gmail.com", tooltip: "Email" },
+    { icon: <FaFilePdf />, href: "https://docs.google.com/document/d/1k57cfjy19jhg6f83ciX9IBrN2TPRL2F2/edit?usp=sharing&ouid=100865608109290630063&rtpof=true&sd=true", download: true, tooltip: "Download Resume" },
+    { icon: <FaFileAlt />, href: "https://drive.google.com/file/d/1J6sDzlP_xbDDkavGqJeDqqZdHF-b_MCU/view?usp=sharing", download: true, tooltip: "Download Cover Letter" },
   ];
 
   return (
@@ -71,8 +71,8 @@ const About = () => {
                   key={i}
                   href={item.href}
                   download={item.download || false}
-                  target={item.href.startsWith("http") ? "_blank" : undefined}
-                  rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  target={item.href.startsWith("https") ? "_blank" : undefined}
+                  rel={item.href.startsWith("https") ? "noopener noreferrer" : undefined}
                   className="tooltip"
                   data-tooltip={item.tooltip}
                 >

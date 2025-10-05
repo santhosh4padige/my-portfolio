@@ -187,6 +187,7 @@ ul {
 }
 
 /* Mobile */
+/* --- Small screens: stack cards on right side --- */
 @media (max-width: 768px) {
 
   .timeline-item,
@@ -199,6 +200,15 @@ ul {
     padding-right: 20px;
   }
 
+  .timeline-item.left .card-front {
+    text-align: right;
+  }
+
+  .timeline-item.right .card-back {
+    margin-left: -4px;
+  }
+
+  /* Dot position */
   .timeline-dot {
     left: 20px !important;
     transform: translateY(-50%) !important;
@@ -208,13 +218,29 @@ ul {
     left: 20px;
   }
 
-  .timeline-item.left .card-front,
-  .timeline-item.left .card-back {
-    text-align: left;
-    margin-left: 0;
+  /* Stack front and back vertically */
+  .card-inner {
+    transform: none !important;
+    display: flex;
+    flex-direction: column;
   }
 
-  .timeline-item.right .job-card {
-    margin-left: 0;
+  .card-front,
+  .card-back {
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    margin: 0.5rem 0;
+    backface-visibility: visible !important;
+  }
+
+  /* Optional: spacing between timeline items */
+  .timeline-item {
+    margin-bottom: 2rem;
+  }
+
+  /* Optional: card shadows */
+  .job-card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 }
