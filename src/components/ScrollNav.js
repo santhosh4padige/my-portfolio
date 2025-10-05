@@ -22,7 +22,7 @@ export default function ScrollNav() {
           setCurrentSection(index);
         }
       },
-      { threshold: 0.6 } // Higher threshold ensures section is mostly visible
+      { threshold: 0.6 }
     );
 
     sectionElements.forEach((el) => el && observer.observe(el));
@@ -35,7 +35,6 @@ export default function ScrollNav() {
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Check if last section is fully visible
   const isLastSectionVisible = () => {
     const last = document.getElementById(sections[sections.length - 1].id);
     if (!last) return false;
@@ -55,7 +54,6 @@ export default function ScrollNav() {
         </button>
       )}
 
-      {/* Only show down arrow if last section is NOT fully visible */}
       {!isLastSectionVisible() && currentSection < sections.length - 1 && (
         <button
           className="scroll-btn down"

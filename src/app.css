@@ -7,6 +7,10 @@
   --transition: 0.3s ease;
 }
 
+.app {
+  background: #24243e;
+}
+
 /* ------------------------------
    Navbar Container
 ------------------------------ */
@@ -30,7 +34,8 @@
 
 .navbar.light {
   background: rgba(255, 255, 255, 0.95);
-  color: #111; /* darker for readability */
+  color: #111;
+  /* darker for readability */
 }
 
 /* ------------------------------
@@ -113,6 +118,14 @@ body.light .theme-toggle:hover {
   color: #fff;
 }
 
+.section {
+  min-height: 53vh;
+  scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+}
+
 /* ------------------------------
    Hamburger Menu (Mobile)
 ------------------------------ */
@@ -155,48 +168,54 @@ body.light .menu-icon span {
 
 /* Container for scroll nav buttons */
 .scroll-nav {
-  position: fixed;        /* Fixed on screen */
-  right: 20px;            /* Distance from right edge */
-  bottom: 40px;           /* Distance from bottom edge */
+  position: fixed;
+  right: 13px;
+  bottom: 35%;
   display: flex;
   flex-direction: column;
-  gap: 15px;              /* Space between buttons */
-  z-index: 9999;          /* On top of all content */
+  gap: 15px;
+  z-index: 9999;
   pointer-events: auto;
 }
 
 /* Common button style */
 .scroll-btn {
   position: relative;
-  background: var(--primary);   /* Primary theme color */
+  background: var(--primary);
+  /* Primary theme color */
   border: none;
   color: var(--dark-bg);
   width: 48px;
   height: 48px;
-  border-radius: 50%;           /* Circular buttons */
+  border-radius: 50%;
+  /* Circular buttons */
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Hover effects */
 .scroll-btn:hover {
-  transform: scale(1.2);        /* Slight pop effect */
-  background: var(--light-text);/* Light color on hover */
-  color: var(--dark-bg);        /* Icon color changes */
-  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  transform: scale(1.2);
+  /* Slight pop effect */
+  background: var(--light-text);
+  /* Light color on hover */
+  color: var(--dark-bg);
+  /* Icon color changes */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
 /* Tooltip styling */
 .scroll-btn .tooltip-text {
   position: absolute;
-  left: -160%;                   /* Show tooltip on left */
+  left: -160%;
+  /* Show tooltip on left */
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.75);
+  background: rgba(0, 0, 0, 0.75);
   color: #fff;
   padding: 5px 10px;
   font-size: 0.85rem;
@@ -210,7 +229,8 @@ body.light .menu-icon span {
 /* Show tooltip on hover */
 .scroll-btn:hover .tooltip-text {
   opacity: 1;
-  transform: translateY(-50%) translateX(-5px); /* slight slide-in effect */
+  transform: translateY(-50%) translateX(-5px);
+  /* slight slide-in effect */
 }
 
 /* Optional arrow for tooltip */
@@ -222,7 +242,7 @@ body.light .menu-icon span {
   transform: translateY(-50%);
   border-width: 5px;
   border-style: solid;
-  border-color: transparent transparent transparent rgba(0,0,0,0.75);
+  border-color: transparent transparent transparent rgba(0, 0, 0, 0.75);
 }
 
 /* Responsive adjustments */

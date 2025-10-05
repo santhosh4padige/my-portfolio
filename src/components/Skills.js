@@ -90,7 +90,7 @@ const Skills = () => {
   const skillsRef = useRef();
 
   // Time-based smooth scroll function
-  const useSmoothScroll = (ref, speed = 0.05, dependency) => {
+  const useSmoothScroll = (ref, speed = 0.6, dependency) => {
     useEffect(() => {
       let animationId;
       let lastTime = performance.now();
@@ -117,7 +117,7 @@ const Skills = () => {
   };
 
   // Apply smooth scroll to categories and skills
-  useSmoothScroll(categoryRef, 0.03, null); // slower scroll for categories
+  useSmoothScroll(categoryRef,0.05, null); // slower scroll for categories
   useSmoothScroll(skillsRef, 0.05, selectedCategory); // slightly faster for skills
 
   return (
