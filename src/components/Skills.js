@@ -158,8 +158,8 @@ const Skills = () => {
     }, [ref, dependency, speed]);
   };
 
-  useSmoothScroll(categoryRef, 0.2, null);
-  useSmoothScroll(skillsRef, 0.3, selectedCategory);
+  useSmoothScroll(categoryRef, 0.05, null);
+  useSmoothScroll(skillsRef, 0.05, selectedCategory);
 
   return (
     <section className="skills-container">
