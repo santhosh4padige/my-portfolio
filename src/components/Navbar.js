@@ -5,8 +5,8 @@ import {
   BookOpen,
   Briefcase,
   Wrench,
-  Sun,
-  Moon,
+  // Sun,
+  // Moon,
 } from "lucide-react";
 import "../app.css";
 
