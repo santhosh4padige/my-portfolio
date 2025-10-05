@@ -1,7 +1,21 @@
-import React from "react";
-import { motion } from "framer-motion";
-import "./SkillsShowcase.css"; // Custom CSS file
+import React, { useState, useEffect, useRef } from "react";
+import { FaArrowLeft } from "react-icons/fa";
+import { FaCode, FaLaptopCode, FaCogs, FaDatabase, FaCloud, FaProjectDiagram, FaVial, FaTools, FaCheckCircle } from "react-icons/fa";
+import "./SkillsShowcase.css";
 
+const categoryIcons = {
+  "Programming Languages": <FaCode />,
+  "User Interface Development": <FaLaptopCode />,
+  Frameworks: <FaCogs />,
+  Databases: <FaDatabase />,
+  "Cloud & DevOps": <FaCloud />,
+  "System Design": <FaProjectDiagram />,
+  Testing: <FaVial />,
+  "Tools & Technologies": <FaTools />,
+  Methodologies: <FaCheckCircle />,
+};
+
+// Skills Data
 const skillsData = {
   "Programming Languages": [
     { name: "Java", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
@@ -31,7 +45,7 @@ const skillsData = {
     { name: "Cassandra", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" },
   ],
   "Cloud & DevOps": [
-    { name: "AWS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" },
+    { name: "AWS", logo: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" },
     { name: "GCP", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" },
     { name: "Azure", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
     { name: "Kubernetes", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" },
@@ -48,8 +62,6 @@ const skillsData = {
   Testing: [
     { name: "JUnit", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
     { name: "Mockito", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Mockito_Logo.png" },
-
-
     { name: "Jest", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" },
     { name: "Cypress", logo: "https://avatars.githubusercontent.com/u/8908513?s=200&v=4" },
     { name: "Jasmine", logo: "https://www.pikpng.com/pngl/m/129-1291662_jasmine-logo-png-transparent-jasmine-angular-clipart.png" },
@@ -72,69 +84,96 @@ const skillsData = {
     { name: "TDD", logo: "https://img.icons8.com/ios/452/test.png" },
   ],
 };
-
-const containerVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { staggerChildren: 0.15, duration: 0.6, ease: "easeOut" },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
-
 const Skills = () => {
-  return (
-    <motion.section
-      id="skills"
-      className="section"
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      viewport={{ once: true }}
-    >
-      <div className="skills-container">
-        <h2 className="skills-title">Technical Skills</h2>
-        {Object.entries(skillsData).map(([category, skills], index) => (
-          <motion.div
-            key={index}
-            className="skills-category"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={containerVariants}
-          >
-            <h3 className="category-title">{category}</h3>
-            <div className="skills-grid">
-              {skills.map((skill, i) => (
-                <motion.div
-                  key={i}
-                  variants={itemVariants}
-                  whileHover={{
-                    rotateX: 10,
-                    rotateY: -10,
-                    scale: 1.05,
-                    boxShadow: "0px 10px 25px rgba(0, 150, 255, 0.5)",
-                    transition: { type: "spring", stiffness: 200, damping: 10 },
-                  }}
-                  className="skill-card"
-                >
-                  <img src={skill.logo} alt={skill.name} className="skill-logo" />
-                  <p className="skill-name">{skill.name}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </motion.section>
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const categoryRef = useRef();
+  const skillsRef = useRef();
 
+  // Time-based smooth scroll function
+  const useSmoothScroll = (ref, speed = 0.05, dependency) => {
+    useEffect(() => {
+      let animationId;
+      let lastTime = performance.now();
+
+      const scroll = (time) => {
+        const container = ref.current;
+        const delta = time - lastTime;
+        lastTime = time;
+
+        if (container) {
+          container.scrollLeft += speed * delta;
+          if (container.scrollLeft >= container.scrollWidth / 2) {
+            container.scrollLeft = 0;
+          }
+        }
+
+        animationId = requestAnimationFrame(scroll);
+      };
+
+      animationId = requestAnimationFrame(scroll);
+
+      return () => cancelAnimationFrame(animationId);
+    }, [ref, dependency, speed]);
+  };
+
+  // Apply smooth scroll to categories and skills
+  useSmoothScroll(categoryRef, 0.03, null); // slower scroll for categories
+  useSmoothScroll(skillsRef, 0.05, selectedCategory); // slightly faster for skills
+
+  return (
+    <section className="skills-container">
+      <h2 className="skills-title">Technical Skills</h2>
+
+      {!selectedCategory && (
+        <div className="categories-carousel" ref={categoryRef}>
+          {Object.keys(skillsData).map((category) => (
+            <div
+              key={category}
+              className="category-card"
+              onClick={() => setSelectedCategory(category)}
+            >
+              <div className="category-icon">{categoryIcons[category] || "📌"}</div>
+              <div className="category-name">{category}</div>
+            </div>
+          ))}
+          {/* Duplicate for seamless scroll */}
+          {Object.keys(skillsData).map((category) => (
+            <div key={"dup-" + category} className="category-card">
+              <div className="category-icon">{categoryIcons[category] || "📌"}</div>
+              <div className="category-name">{category}</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {selectedCategory && (
+        <div className="skills-expanded">
+          <div className="expanded-header">
+            <button className="back-btn" onClick={() => setSelectedCategory(null)}>
+              <FaArrowLeft />
+            </button>
+            <h3>{selectedCategory}</h3>
+          </div>
+          <div className="skills-grid" ref={skillsRef}>
+            {skillsData[selectedCategory].map((skill) => (
+              <div className="skill-card" key={skill.name}>
+                <img src={skill.logo} alt={skill.name} className="skill-logo" />
+                <div className="skill-name">{skill.name}</div>
+              </div>
+            ))}
+            {/* Duplicate for seamless scroll */}
+            {skillsData[selectedCategory].map((skill) => (
+              <div className="skill-card" key={"dup-" + skill.name}>
+                <img src={skill.logo} alt={skill.name} className="skill-logo" />
+                <div className="skill-name">{skill.name}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </section>
   );
 };
 
-
 export default Skills;
+
