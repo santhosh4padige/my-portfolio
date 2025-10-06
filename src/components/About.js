@@ -21,8 +21,8 @@ const About = () => {
   const icons = [
     { icon: <FaLinkedin />, href: "https://www.linkedin.com/in/santhosh-kumar-padige/", tooltip: "LinkedIn" },
     { icon: <FaEnvelope />, href: "mailto:santhosh4pdaige@gmail.com", tooltip: "Email" },
-    { icon: <FaFilePdf />, href: "https://docs.google.com/document/d/1k57cfjy19jhg6f83ciX9IBrN2TPRL2F2/edit?usp=sharing&ouid=100865608109290630063&rtpof=true&sd=true", download: true, tooltip: "Download Resume" },
-    { icon: <FaFileAlt />, href: "https://drive.google.com/file/d/1J6sDzlP_xbDDkavGqJeDqqZdHF-b_MCU/view?usp=sharing", download: true, tooltip: "Download Cover Letter" },
+    { icon: <FaFilePdf />, href: "https://drive.google.com/file/d/1mp7fur1uOKwc2bOjMFYNlUqcrz-q4hTV/view?usp=sharing", download: true, tooltip: "Download Resume" },
+    { icon: <FaFileAlt />, href: "https://drive.google.com/file/d/10cx72s4IdOtx2dMNUqPOdWH9WVoDJ4_9/view?usp=sharing", download: true, tooltip: "Download Cover Letter" },
   ];
 
   return (

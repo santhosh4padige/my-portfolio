@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import {
   FaArrowLeft,
   FaCode,
@@ -64,12 +64,12 @@ const categoryIcons = {
   Methodologies: <FaCheckCircle />,
 };
 
-// Skills Data with React Icons
+// Skills Data
 const skillsData = {
   "Programming Languages": [
     { name: "Java", icon: <FaJava size={50} color="#f89820" /> },
     { name: "JavaScript", icon: <FaJsSquare size={50} color="#f7df1e" /> },
-    { name: "TypeScript", icon: <SiGraphql size={50} color="#007acc" /> }, // alternative
+    { name: "TypeScript", icon: <SiGraphql size={50} color="#007acc" /> },
     { name: "Python", icon: <FaPython size={50} color="#3776ab" /> },
   ],
   "User Interface Development": [
@@ -94,7 +94,7 @@ const skillsData = {
   ],
   "Cloud & DevOps": [
     { name: "AWS", icon: <FaAws size={50} color="#ff9900" /> },
-    { name: "GCP", icon: <FaCloud size={50} color="#4285f4" /> }, // alternative
+    { name: "GCP", icon: <FaCloud size={50} color="#4285f4" /> },
     { name: "Kubernetes", icon: <SiKubernetes size={50} color="#326ce5" /> },
     { name: "Docker", icon: <FaDocker size={50} color="#2496ed" /> },
     { name: "Terraform", icon: <SiTerraform size={50} color="#623ce4" /> },
@@ -114,7 +114,7 @@ const skillsData = {
     { name: "Karma", icon: <FaVials size={50} color="#ff0000" /> },
   ],
   "Tools & Technologies": [
-    { name: "Apache Kafka", icon: <SiJenkins size={50} color="#d24939" /> }, // alternative
+    { name: "Apache Kafka", icon: <SiJenkins size={50} color="#d24939" /> },
     { name: "Celery", icon: <SiCelery size={50} color="#4e9a06" /> },
     { name: "Hibernate", icon: <SiHibernate size={50} color="#59666c" /> },
     { name: "Git", icon: <FaGit size={50} color="#f05032" /> },
@@ -133,59 +133,32 @@ const skillsData = {
 
 const Skills = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const categoryRef = useRef();
-  const skillsRef = useRef();
-
-  const useSmoothScroll = (ref, speed = 0.3, dependency) => {
-    useEffect(() => {
-      const container = ref.current;
-      if (!container) return;
-
-      let animationId;
-
-      const step = () => {
-        if (!container) return;
-
-        container.scrollLeft += speed;
-
-        // reset scroll when it reaches half of scrollWidth (because of duplicates)
-        if (container.scrollLeft >= container.scrollWidth / 2) {
-          container.scrollLeft = 0;
-        }
-
-        animationId = requestAnimationFrame(step);
-      };
-
-      animationId = requestAnimationFrame(step);
-
-      return () => cancelAnimationFrame(animationId);
-    }, [ref, dependency, speed]);
-  };
-
-  useSmoothScroll(categoryRef, 0.25, null);
-  useSmoothScroll(skillsRef, 0.35, selectedCategory);
 
   return (
     <section className="skills-container">
       <h2 className="skills-title">Technical Skills</h2>
-
+      {/* Categories carousel */}
       {!selectedCategory && (
-        <div className="categories-carousel" ref={categoryRef}>
-          {Object.keys(skillsData).map((category) => (
-            <div key={category} className="category-card" onClick={() => setSelectedCategory(category)}>
-              <div className="category-icon">{categoryIcons[category] || "📌"}</div>
-              <div className="category-name">{category}</div>
-            </div>
-          ))}
-          {Object.keys(skillsData).map((category, index) => (
-            <div key={`dup-${category}-${index}`} className="category-card">
-              <div className="category-icon">{categoryIcons[category] || "📌"}</div>
-              <div className="category-name">{category}</div>
-            </div>
-          ))}
+        <div className="categories-carousel">
+          <div className="category-track">
+            {Object.keys(skillsData).map((category) => (
+              <div key={category} className="category-card" onClick={() => setSelectedCategory(category)}>
+                <div className="category-icon">{categoryIcons[category] || "📌"}</div>
+                <div className="category-name">{category}</div>
+              </div>
+            ))}
+            {/* duplicate for seamless loop */}
+            {Object.keys(skillsData).map((category, index) => (
+              <div key={`dup-${category}-${index}`} className="category-card">
+                <div className="category-icon">{categoryIcons[category] || "📌"}</div>
+                <div className="category-name">{category}</div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
+      {/* Skills scroll */}
       {selectedCategory && (
         <div className="skills-expanded">
           <div className="expanded-header">
@@ -194,22 +167,26 @@ const Skills = () => {
             </button>
             <h3>{selectedCategory}</h3>
           </div>
-          <div className="skills-grid" ref={skillsRef}>
-            {skillsData[selectedCategory].map((skill) => (
-              <div className="skill-card" key={skill.name}>
-                {skill.icon}
-                <div className="skill-name">{skill.name}</div>
-              </div>
-            ))}
-            {skillsData[selectedCategory].map((skill, index) => (
-              <div className="skill-card" key={`dup-${skill.name}-${index}`}>
-                {skill.icon}
-                <div className="skill-name">{skill.name}</div>
-              </div>
-            ))}
+          <div className="skills-grid">
+            <div className="skills-track">
+              {skillsData[selectedCategory].map((skill) => (
+                <div className="skill-card" key={skill.name}>
+                  {skill.icon}
+                  <div className="skill-name">{skill.name}</div>
+                </div>
+              ))}
+              {/* duplicate for smooth loop */}
+              {skillsData[selectedCategory].map((skill, index) => (
+                <div className="skill-card" key={`dup-${skill.name}-${index}`}>
+                  {skill.icon}
+                  <div className="skill-name">{skill.name}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}
+
     </section>
   );
 };

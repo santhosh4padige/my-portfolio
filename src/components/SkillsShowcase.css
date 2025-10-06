@@ -7,6 +7,10 @@
   --transition: 0.3s ease;
 }
 
+/* ============================= */
+/* 🧠 Container & Title          */
+/* ============================= */
+
 .skills-container {
   background: var(--dark-bg);
   color: var(--dark-text);
@@ -23,16 +27,43 @@
   text-transform: uppercase;
 }
 
-/* Categories Carousel */
-.categories-carousel {
-  display: flex;
-  gap: 20px;
-  overflow: hidden;
-  padding: 40px 20px;
-  scroll-behavior: smooth;
-  height: 23vh;
+/* ============================= */
+/* 🚀 Auto Scroll Animations     */
+/* ============================= */
+
+@keyframes scroll-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
+/* ============================= */
+/* 🧩 Categories Carousel        */
+/* ============================= */
+
+.categories-carousel {
+  display: flex;
+  overflow: hidden;
+  padding: 40px 20px;
+  height: 23vh;
+  position: relative;
+}
+
+.category-track {
+  display: flex;
+  gap: 20px;
+  animation: scroll-horizontal 25s linear infinite;
+  width: max-content;
+}
+
+.categories-carousel:hover .category-track {
+  animation-play-state: paused;
+}
+
+/* Individual category cards */
 .category-card {
   flex: 0 0 auto;
   width: 150px;
@@ -44,8 +75,8 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform var(--transition), box-shadow var(--transition);
   text-align: center;
 }
 
@@ -65,7 +96,10 @@
   font-weight: 500;
 }
 
-/* Expanded Skills Section */
+/* ============================= */
+/* 🧱 Skills Expanded Section    */
+/* ============================= */
+
 .skills-expanded {
   margin-top: 20px;
 }
@@ -88,34 +122,51 @@
   cursor: pointer;
   color: var(--primary);
   font-size: 1.5rem;
-  transition: transform 0.3s ease;
+  transition: transform var(--transition);
 }
 
 .back-btn:hover {
   transform: scale(1.2);
 }
 
-/* Skills Grid Horizontal Scroll */
+/* ============================= */
+/* ⚙️ Skills Auto Scroll        */
+/* ============================= */
+
 .skills-grid {
   display: flex;
-  gap: 20px;
   overflow: hidden;
+  position: relative;
   padding: 20px 0;
 }
 
-/* Individual Skill Card */
+.skills-track {
+  display: flex;
+  gap: 20px;
+  animation: scroll-horizontal 20s linear infinite;
+  width: max-content;
+}
+
+.skills-grid:hover .skills-track {
+  animation-play-state: paused;
+}
+
+/* ============================= */
+/* 💎 Individual Skill Cards     */
+/* ============================= */
+
 .skill-card {
   flex: 0 0 auto;
   width: 140px;
   height: 140px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 15px;
   text-align: center;
   padding: 15px;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative; /* needed for hover glow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform var(--transition), box-shadow var(--transition);
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -127,7 +178,7 @@
   width: 60px;
   height: 60px;
   margin-bottom: 10px;
-  transition: transform 0.3s ease;
+  transition: transform var(--transition);
   color: var(--primary);
 }
 
@@ -141,7 +192,7 @@
   word-break: break-word;
 }
 
-/* Glow effect for cards */
+/* Glow shimmer on hover */
 .skill-card:hover::after {
   content: "";
   position: absolute;
@@ -158,40 +209,67 @@
 }
 
 @keyframes shimmer {
-  0% { transform: translateX(-200%) ; }
-  100% { transform: translateX(200%) ; }
+  0% {
+    transform: translateX(-200%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
 }
 
-/* Responsive adjustments */
+/* ============================= */
+/* 📱 Responsive Design          */
+/* ============================= */
+
 @media (max-width: 1200px) {
-  .skills-container { max-width: 1000px; }
+  .skills-container {
+    max-width: 1000px;
+  }
 }
 
 @media (max-width: 1024px) {
-  .category-card { width: 120px; height: 120px; }
-  .skills-grid { gap: 15px; }
-  .skill-card { width: 120px; height: 120px; }
+  .category-card {
+    width: 120px;
+    height: 120px;
+  }
+  .skills-grid {
+    gap: 15px;
+  }
+  .skill-card {
+    width: 120px;
+    height: 120px;
+  }
 }
 
 @media (max-width: 768px) {
-  .skills-container { max-width: 90%; padding: 30px 10px; }
-  .skills-title { font-size: 1.8rem; }
-  .expanded-header h3 { font-size: 1.2rem; }
-  .category-card { width: 120px; height: 120px; }
-  .skills-grid { gap: 10px; }
-  .skill-card { width: 120px; height: 120px; }
-}
-.categories-carousel,
-.skills-grid {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto; /* enable horizontal scroll */
-  overflow-y: hidden;
-  scroll-behavior: smooth;
-  scrollbar-width: none; /* Firefox */
+  .skills-container {
+    max-width: 90%;
+    padding: 30px 10px;
+  }
+  .skills-title {
+    font-size: 1.8rem;
+  }
+  .expanded-header h3 {
+    font-size: 1.2rem;
+  }
+  .category-card {
+    width: 110px;
+    height: 110px;
+  }
+  .skills-track {
+    animation-duration: 35s; /* slower on mobile */
+  }
+  .category-track {
+    animation-duration: 40s;
+  }
+  .skill-card {
+    width: 110px;
+    height: 110px;
+  }
 }
 
+/* Hide scrollbars entirely */
 .categories-carousel::-webkit-scrollbar,
 .skills-grid::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+  display: none;
 }

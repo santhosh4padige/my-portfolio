@@ -201,7 +201,7 @@ ul {
   }
 
   .timeline-item.left .card-front {
-    text-align: right;
+    text-align: justify;
   }
 
   .timeline-item.right .card-back {
